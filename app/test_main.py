@@ -1,31 +1,25 @@
 from app import main
+import pytest
 
 
-def test_should_return_zero_human_years_when_age_is_less_than_15() -> None:
-    result = main.get_human_age(10, 14)
-    assert result == [0, 0]
-
-
-def test_first_15_cat_dog_years_give_1_human_year() -> None:
-    result = main.get_human_age(15, 15)
-    assert result == [1, 1]
-
-
-def test_cat_and_dog_should_have_different_human_age() -> None:
-    result = main.get_human_age(28, 28)
-    assert result == [3, 2]
-
-
-def test_24_is_the_second_human_age() -> None:
-    result = main.get_human_age(24, 24)
-    assert result == [2, 2]
-
-
-def test_23_is_the_first_human_age() -> None:
-    result = main.get_human_age(23, 23)
-    assert result == [1, 1]
-
-
-def test_100_is_21_and_17_human_years_for_cat_and_dog() -> None:
-    result = main.get_human_age(100, 100)
-    assert result == [21, 17]
+@pytest.mark.parametrize(
+    "cat_age, dog_age, expected",
+    [
+        (10, 14, [0, 0]),
+        (15, 15, [1, 1]),
+        (28, 28, [3, 2]),
+        (24, 24, [2, 2]),
+        (23, 23, [1, 1]),
+        (100, 100, [21, 17])
+    ],
+    ids=[
+        "should return zero human years when age is less than 15",
+        "first 15 cat and dog years give 1 human year",
+        "cat and dog should have different human age",
+        "24 is the second human age",
+        "23 is still the first human age",
+        "100 years should return correct human years",
+    ]
+)
+def test_get_human_age(cat_age: int, dog_age: int, expected: list) -> None:
+    assert main.get_human_age(cat_age, dog_age) == expected

@@ -9,6 +9,7 @@ def get_human_age(cat_age: int, dog_age: int) -> list:
         dog_age: Dog's age in dog years
     Returns:
         List with [cat_human_age, dog_human_age]
+
     Examples:
         get_human_age(0, 0) == [0, 0]
         get_human_age(15, 15) == [1, 1]
